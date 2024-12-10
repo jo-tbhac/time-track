@@ -24,14 +24,14 @@ const panel = style([
 ])
 
 const logo = style({
-  marginBottom: vars.spacing.l,
+  marginBottom: vars.spacing.xl,
   width: 230
 })
 
 const formWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: vars.spacing.xs,
+  gap: vars.spacing.s,
   marginBottom: vars.spacing.l
 })
 
