@@ -24,7 +24,16 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "a11y": {
+        "noLabelWithoutControl": {
+          "level": "warn",
+          "options": {
+            "inputComponents": ["TextInput"],
+            "labelComponents": ["FormLabel"]
+          }
+        }
+      }
     }
   },
   "javascript": {
