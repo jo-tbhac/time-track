@@ -26,6 +26,9 @@ importers:
       react-router:
         specifier: ^7.0.2
         version: 7.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      zod:
+        specifier: ^3.24.0
+        version: 3.24.0
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -2335,8 +2338,8 @@ packages:
     resolution: {integrity: sha512-GQHQqAopRhwU8Kt1DDM8NjibDXHC8eoh1erhGAJPEyveY9qqVeXvVikNKrDz69sHowPMorbPUrH/mx8c50eiBQ==}
     engines: {node: '>=18'}
 
-  zod@3.23.8:
-    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+  zod@3.24.0:
+    resolution: {integrity: sha512-Hz+wiY8yD0VLA2k/+nsg2Abez674dDGTai33SwNvMPuf9uIrBC9eFgIMQxBBbHFxVXi8W+5nX9DcAh9YNSQm/w==}
 
 snapshots:
 
@@ -3021,7 +3024,7 @@ snapshots:
     dependencies:
       '@scaffdog/types': 4.1.0
       jiti: 1.21.6
-      zod: 3.23.8
+      zod: 3.24.0
 
   '@scaffdog/core@4.1.0':
     dependencies:
@@ -4261,7 +4264,7 @@ snapshots:
       valid-filename: 4.0.0
       wrap-ansi: 9.0.0
       yargs: 17.7.2
-      zod: 3.23.8
+      zod: 3.24.0
     transitivePeerDependencies:
       - supports-color
 
@@ -4528,4 +4531,4 @@ snapshots:
 
   yoctocolors@2.1.1: {}
 
-  zod@3.23.8: {}
+  zod@3.24.0: {}

@@ -17,7 +17,8 @@
     "@vanilla-extract/recipes": "^0.5.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router": "^7.0.2"
+    "react-router": "^7.0.2",
+    "zod": "^3.24.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
