@@ -14,7 +14,10 @@ export const vars = createGlobalTheme(':root', {
       gray: '#777777',
       placeholder: '#ababab',
       link: '#0071c1',
-      white: '#ffffff'
+      white: '#ffffff',
+      danger: '#cb3a31',
+      warning: '#cd7b2e',
+      success: '#019b5f'
     },
     component: {
       border: '#e0e0e0',
