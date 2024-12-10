@@ -7,3 +7,7 @@ globalStyle('html, body', {
   fontFamily: '"Noto Sans JP Variable", sans-serif',
   margin: 0
 })
+
+globalStyle('*', {
+  outlineColor: vars.color.main.primaryDark
+})
