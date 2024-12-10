@@ -59,4 +59,4 @@ export const vars = createGlobalTheme(':root', {
     xl: '32px',
     xxl: '40px'
   }
-})
+} as const)
