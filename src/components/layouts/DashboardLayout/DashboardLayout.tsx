@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import { Outlet } from 'react-router'
 
 import { Sidebar } from '@/components/model/Sidebar'
+import { Outlet } from '@/lib/router'
 
 import styles from './DashboardLayout.css'
 

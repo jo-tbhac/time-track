@@ -2,7 +2,7 @@ import { DashboardLayout } from '@/components/layouts/DashboardLayout'
 import { Dashboard } from '@/components/pages/Dashboard'
 import { Setting } from '@/components/pages/Setting'
 import { SignIn } from '@/components/pages/SignIn'
-import { BrowserRouter, Route, Routes } from '@/router'
+import { BrowserRouter, Route, Routes } from '@/lib/router'
 
 const App = () => {
   return (
