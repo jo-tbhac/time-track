@@ -29,7 +29,7 @@ export const Button: FC<Props> = ({
       {loading && (
         <div className={styles.loadingContainer}>
           <Spinner
-            size="large"
+            size="small"
             color={color === 'secondary' ? vars.color.text.gray : vars.color.text.white}
           />
         </div>
