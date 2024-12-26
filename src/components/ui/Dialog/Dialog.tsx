@@ -1,9 +1,10 @@
-import type { FC, ReactNode } from 'react'
+import type { FC, MouseEvent, ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import { Typography } from '../Typography'
 import styles from './Dialog.css'
+import { useEscapeKeyClose } from './hooks'
 
 interface DialogProps {
   open: boolean
@@ -23,7 +24,7 @@ interface DialogFooterProps {
   children: ReactNode
 }
 
-export const Dialog: FC<DialogProps> = ({ open, children }) => {
+export const Dialog: FC<DialogProps> = ({ open, children, handleClose }) => {
   const dialogRef = useRef<HTMLDivElement>(null)
 
   const [isIn, setIsIn] = useState(open)
@@ -39,13 +40,23 @@ export const Dialog: FC<DialogProps> = ({ open, children }) => {
     }, 200)
   }, [open])
 
+  useEscapeKeyClose({ open, handleClose })
+
+  const handleClickContainer = (event: MouseEvent) => {
+    event.stopPropagation()
+  }
+
   if (!isIn) {
     return null
   }
 
   return createPortal(
-    <div ref={dialogRef} className={styles.overlay}>
-      <div className={styles.container}>{children}</div>
+    // biome-ignore lint/a11y/useKeyWithClickEvents: handled by useEscapeKeyClose
+    <div ref={dialogRef} className={styles.overlay} onClick={handleClose}>
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: just stop propagation of events */}
+      <div className={styles.container} onClick={handleClickContainer}>
+        {children}
+      </div>
     </div>,
     document.body
   )
