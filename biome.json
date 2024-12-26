@@ -33,6 +33,9 @@
             "labelComponents": ["FormLabel"]
           }
         }
+      },
+      "suspicious": {
+        "noConsole": "warn"
       }
     }
   },
