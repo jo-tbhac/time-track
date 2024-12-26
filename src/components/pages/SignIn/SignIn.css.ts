@@ -19,7 +19,7 @@ const panel = style([
     display: 'flex',
     flexDirection: 'column',
     padding: `${vars.spacing.xl} 60px`,
-    width: 450
+    width: 500
   }
 ])
 
@@ -32,14 +32,18 @@ const formWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.spacing.s,
-  marginBottom: vars.spacing.l
+  marginBottom: vars.spacing.l,
+  width: '100%'
 })
 
 const formSection = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: vars.spacing.xxs,
-  width: 300
+  gap: vars.spacing.xxs
 })
 
-export default { container, panel, logo, formWrapper, formSection }
+const alert = style({
+  marginBottom: vars.spacing.m
+})
+
+export default { container, panel, logo, formWrapper, formSection, alert }

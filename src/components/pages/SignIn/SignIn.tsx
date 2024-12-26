@@ -1,9 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthError, signIn } from 'aws-amplify/auth'
 import type { FC } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import logo from '@/assets/logo.png'
+import { Alert } from '@/components/ui/Alert'
 import { Button } from '@/components/ui/Button'
 import { FormErrorText } from '@/components/ui/FormErrorText'
 import { FormLabel } from '@/components/ui/FormLabel'
@@ -26,6 +28,8 @@ export const SignIn: FC = () => {
 
   const navigate = useNavigate()
 
+  const [alertMessage, setAlertMessage] = useState<string | undefined>()
+
   const onSubmit = async (data: FormSchema) => {
     try {
       const { nextStep } = await signIn({
@@ -43,8 +47,7 @@ export const SignIn: FC = () => {
         return
       }
       if (error instanceof AuthError && error.name === 'NotAuthorizedException') {
-        // TODO show alert
-        // User is disabled or incorrect username or password
+        setAlertMessage('メールアドレスまたはパスワードが正しくありません。')
         return
       }
       throw error
@@ -56,6 +59,9 @@ export const SignIn: FC = () => {
       <div className={styles.container}>
         <Panel className={styles.panel}>
           <img src={logo} alt="logo" className={styles.logo} />
+
+          {alertMessage && <Alert className={styles.alert}>{alertMessage}</Alert>}
+
           <div className={styles.formWrapper}>
             <div className={styles.formSection}>
               <FormLabel htmlFor="signin-email">メールアドレス</FormLabel>
