@@ -5,11 +5,14 @@ import { FaArrowRightFromBracket, FaEllipsis, FaHouse } from 'react-icons/fa6'
 import { SignOutConfirmDialog } from '@/components/model/SignOutConfirmDialog'
 import { IconButton } from '@/components/ui/IconButton'
 import { Typography } from '@/components/ui/Typography'
+import { useNavigate } from '@/lib/router'
 
 import styles from './Sidebar.css'
 
 export const Sidebar: FC = () => {
   const [openSignOutDialog, setOpenSignOutDialog] = useState(false)
+
+  const navigate = useNavigate()
 
   const handleOpenSignOutDialog = () => {
     setOpenSignOutDialog(true)
@@ -17,6 +20,10 @@ export const Sidebar: FC = () => {
 
   const handleCloseSignOutDialog = () => {
     setOpenSignOutDialog(false)
+  }
+
+  const handleClickSettingButton = () => {
+    navigate('/setting')
   }
 
   return (
@@ -29,7 +36,7 @@ export const Sidebar: FC = () => {
               ホーム
             </Typography>
           </IconButton>
-          <IconButton className={styles.iconButton}>
+          <IconButton className={styles.iconButton} onClick={handleClickSettingButton}>
             <FaEllipsis size={20} />
             <Typography fontSize="textXXS" bold color="white">
               設定
