@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 export const useEscapeKeyClose = ({
   open,
   handleClose
-}: { open: boolean; handleClose: () => void }) => {
+}: { open: boolean; handleClose?: () => void }) => {
   useEffect(() => {
-    if (!open) {
+    if (!open || !handleClose) {
       return
     }
 

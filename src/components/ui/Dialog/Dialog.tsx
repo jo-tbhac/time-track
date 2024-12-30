@@ -8,7 +8,7 @@ import { useEscapeKeyClose } from './hooks'
 
 interface DialogProps {
   open: boolean
-  handleClose: () => void
+  handleClose?: () => void
   children: ReactNode
 }
 
