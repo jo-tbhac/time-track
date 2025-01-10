@@ -1,14 +1,16 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "biomejs.biome",
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+  "[go]": {
+    "editor.tabSize": 4
   },
-  "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
+  "[typescript][typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.codeActionsOnSave": {
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
+    }
   },
-  "cSpell.enabled": true,
-  "cSpell.import": ["${workspaceFolder}/.cspell/cspell.json"],
-  "biome.lspBin": "node_modules/@biomejs/biome/bin/biome"
+  "biome.lspBin": "frontend/node_modules/@biomejs/biome/bin/biome"
 }
