@@ -6,11 +6,9 @@ import { Tab, TabContainer } from '@/components/ui/Tab'
 
 import { JobList } from './JobList'
 import styles from './Setting.css'
-import { UpdateEmailForm } from './UpdateEmailForm'
 
 const TAB_NAMES = {
-  jobs: 'jobs',
-  account: 'account'
+  jobs: 'jobs'
 } as const
 
 type TabName = (typeof TAB_NAMES)[keyof typeof TAB_NAMES]
@@ -20,8 +18,6 @@ export const Setting: FC = () => {
 
   const TabContent = useMemo(() => {
     switch (selectedTab) {
-      case TAB_NAMES.account:
-        return <UpdateEmailForm />
       case TAB_NAMES.jobs:
         return <JobList />
     }
@@ -29,10 +25,6 @@ export const Setting: FC = () => {
 
   const handleClickJobsTab = () => {
     setSelectedTab(TAB_NAMES.jobs)
-  }
-
-  const handleClickAccountTab = () => {
-    setSelectedTab(TAB_NAMES.account)
   }
 
   return (
@@ -44,11 +36,6 @@ export const Setting: FC = () => {
               text="仕事データ"
               active={selectedTab === TAB_NAMES.jobs}
               onClick={handleClickJobsTab}
-            />
-            <Tab
-              text="アカウント"
-              active={selectedTab === TAB_NAMES.account}
-              onClick={handleClickAccountTab}
             />
           </TabContainer>
         </div>
