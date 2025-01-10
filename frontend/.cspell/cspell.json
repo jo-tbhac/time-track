@@ -10,6 +10,6 @@
   ],
   "files": ["**/*.{ts,tsx,js,jsx}"],
   "dictionaries": ["project-words"],
-  "ignorePaths": ["node_modules"],
+  "ignorePaths": ["**/node_modules/**", "**/dist/**", "**/wailsjs/**"],
   "ignoreRegExpList": ["/import\\s*(?:[\\w*{},\\s]*\\sfrom\\s*)?['\"]([^'\"]+)['\"]/"]
 }
