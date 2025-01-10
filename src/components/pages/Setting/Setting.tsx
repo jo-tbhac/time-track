@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { Panel } from '@/components/ui/Panel'
 import { Tab, TabContainer } from '@/components/ui/Tab'
 
+import { JobList } from './JobList'
 import styles from './Setting.css'
 import { UpdateEmailForm } from './UpdateEmailForm'
 
@@ -22,7 +23,7 @@ export const Setting: FC = () => {
       case TAB_NAMES.account:
         return <UpdateEmailForm />
       case TAB_NAMES.jobs:
-        return <></>
+        return <JobList />
     }
   }, [selectedTab])
 
