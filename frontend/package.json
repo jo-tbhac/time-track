@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "check": "biome check ./src",
+    "check:lint": "biome check ./src",
+    "check:type": "tsc --noEmit",
     "cspell": "cspell -c ./.cspell/cspell.json",
     "scaffdog": "scaffdog generate"
   },
