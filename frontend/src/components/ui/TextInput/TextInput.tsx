@@ -4,6 +4,8 @@ import styles from './TextInput.css'
 
 interface Props extends ComponentProps<'input'> {}
 
-export const TextInput: FC<Props> = (props) => {
-  return <input className={styles.container} {...props} />
+export const TextInput: FC<Props> = ({ className, ...props }) => {
+  const classNames = [styles.container, className].join(' ')
+
+  return <input className={classNames} {...props} />
 }
