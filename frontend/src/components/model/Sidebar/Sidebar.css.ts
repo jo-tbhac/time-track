@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css'
 
-import { baseIconButtonStyle } from '@/components/ui/IconButton'
 import { vars } from '@/styles/theme.css'
 
 const container = style({
@@ -21,13 +20,10 @@ const topSection = style({
   width: '100%'
 })
 
-const iconButton = style([
-  baseIconButtonStyle,
-  {
-    color: vars.color.text.white,
-    height: 50,
-    width: 50
-  }
-])
+const iconButton = style({
+  color: vars.color.text.white,
+  height: 50,
+  width: 50
+})
 
 export default { container, topSection, iconButton }
