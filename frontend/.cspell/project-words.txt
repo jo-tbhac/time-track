@@ -1,2 +1,3 @@
 biomejs
 noto
+wailsjs
