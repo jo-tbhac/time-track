@@ -22,10 +22,12 @@ interface TableBodyProps {
 
 interface TableRowProps {
   children?: ReactNode
+  className?: string
 }
 
 interface TableCellProps {
   children?: ReactNode
+  className?: string
 }
 
 interface ColGroupProps {
@@ -56,12 +58,16 @@ export const TableBody: FC<TableBodyProps> = ({ children }) => {
   return <tbody className={styles.tableBody}>{children}</tbody>
 }
 
-export const TableRow: FC<TableRowProps> = ({ children }) => {
-  return <tr className={styles.tableRow}>{children}</tr>
+export const TableRow: FC<TableRowProps> = ({ children, className }) => {
+  const classNames = [styles.tableRow, className].join(' ')
+
+  return <tr className={classNames}>{children}</tr>
 }
 
-export const TableCell: FC<TableCellProps> = ({ children }) => {
-  return <td className={styles.tableCell}>{children}</td>
+export const TableCell: FC<TableCellProps> = ({ children, className }) => {
+  const classNames = [styles.tableCell, className].join(' ')
+
+  return <td className={classNames}>{children}</td>
 }
 
 export const ColGroup: FC<ColGroupProps> = ({ children }) => {
