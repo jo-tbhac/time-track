@@ -1,5 +1,9 @@
 import { style } from '@vanilla-extract/css'
 
-const container = style({})
+import { vars } from '@/styles/theme.css'
 
-export default { container }
+const buttonContainer = style({
+  marginTop: vars.spacing.xs
+})
+
+export default { buttonContainer }
