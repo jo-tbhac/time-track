@@ -1,5 +1,4 @@
 import type { FC } from 'react'
-import { useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 
 import {
@@ -13,16 +12,13 @@ import {
   TableRow
 } from '@/components/ui/Table'
 import { TextButton } from '@/components/ui/TextButton'
-import type { Job } from '@/types/job'
 
 import { JobListItem } from '../JobListItem'
 import styles from './JobList.css'
+import { useJobs } from './hooks'
 
 export const JobList: FC = () => {
-  const [jobs, setJobs] = useState<Job[]>([
-    { id: 1000, name: 'ソフトウェア開発', hourlyWage: 5000 },
-    { id: 1001, name: 'デザイン', hourlyWage: 4000 }
-  ])
+  const { loading, jobs, setJobs } = useJobs()
 
   const handleClickNewJob = () => {
     setJobs((currentJobs) => {
@@ -32,6 +28,11 @@ export const JobList: FC = () => {
       }
       return [...currentJobs, { id: 0, name: '', hourlyWage: 0 }]
     })
+  }
+
+  // TODO loading
+  if (loading) {
+    return null
   }
 
   return (

@@ -1,3 +1,4 @@
 import createJob from './createJob'
+import fetchJobs from './fetchJobs'
 
-export { createJob }
+export { createJob, fetchJobs }

@@ -3,3 +3,5 @@
 import {model} from '../models';
 
 export function CreateJob(arg1:model.CreateJobParams):Promise<model.Job>;
+
+export function FindJobs():Promise<Array<model.Job>>;
