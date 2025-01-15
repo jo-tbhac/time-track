@@ -39,3 +39,8 @@ func (a *App) CreateJob(p model.CreateJobParams) model.Job {
 	job, _ := jobHandler.CreateJob(p)
 	return job
 }
+
+func (a *App) FindJobs() []model.Job {
+	jobs := jobHandler.FindJobs()
+	return jobs
+}

@@ -24,3 +24,10 @@ func (r JobRepository) Create(p model.CreateJobParams) (model.Job, error) {
 
 	return job, nil
 }
+
+func (r JobRepository) FindAll() []model.Job {
+	var jobs []model.Job
+	r.db.Find(&jobs)
+
+	return jobs
+}

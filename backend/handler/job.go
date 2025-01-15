@@ -25,3 +25,9 @@ func (h JobHandler) CreateJob(p model.CreateJobParams) (model.Job, error) {
 
 	return job, nil
 }
+
+func (h JobHandler) FindJobs() []model.Job {
+	jobs := h.repository.FindAll()
+
+	return jobs
+}
