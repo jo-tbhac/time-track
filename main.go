@@ -17,9 +17,10 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "time-track",
-		Width:  1024,
-		Height: 768,
+		Title:       "TimeTrack",
+		MinWidth:    600,
+		MinHeight:   450,
+		StartHidden: true,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},

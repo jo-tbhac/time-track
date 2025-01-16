@@ -12,6 +12,7 @@ frontend/dist
 build/bin
 *.local
 *.db.sqlite3
+config.dev.json
 
 # Editor directories and files
 .idea
