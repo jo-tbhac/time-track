@@ -9,3 +9,7 @@ export function CreateJob(arg1) {
 export function FindJobs() {
   return window['go']['main']['App']['FindJobs']();
 }
+
+export function OnResizeWindow() {
+  return window['go']['main']['App']['OnResizeWindow']();
+}

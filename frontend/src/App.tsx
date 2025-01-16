@@ -2,8 +2,11 @@ import { DashboardLayout } from '@/components/layouts/DashboardLayout'
 import { Dashboard } from '@/components/pages/Dashboard'
 import { Setting } from '@/components/pages/Setting'
 import { BrowserRouter, Navigate, Route, Routes } from '@/lib/router'
+import { useSubscribeWindowResize } from '@/runtime/events/resizeWindow'
 
 const App = () => {
+  useSubscribeWindowResize()
+
   return (
     <BrowserRouter>
       <Routes>
