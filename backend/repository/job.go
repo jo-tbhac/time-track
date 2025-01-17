@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"log"
 	"time-track/backend/model"
 
 	"gorm.io/gorm"
@@ -19,6 +20,7 @@ func (r JobRepository) Create(p model.CreateJobParams) (model.Job, error) {
 	result := r.db.Create(&job)
 
 	if result.Error != nil {
+		log.Printf("Fail to create job: %v\n", result.Error.Error())
 		return job, result.Error
 	}
 

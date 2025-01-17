@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"log"
 	"time-track/backend/model"
 	"time-track/backend/repository"
 )
@@ -14,16 +13,9 @@ func NewJobHandler(r repository.JobRepository) JobHandler {
 	return JobHandler{repository: r}
 }
 
-func (h JobHandler) CreateJob(p model.CreateJobParams) (model.Job, error) {
-	job, err := h.repository.Create(p)
-
-	if err != nil {
-		// TODO handle error
-		log.Print(err)
-		return job, err
-	}
-
-	return job, nil
+func (h JobHandler) CreateJob(p model.CreateJobParams) model.Job {
+	job, _ := h.repository.Create(p)
+	return job
 }
 
 func (h JobHandler) FindJobs() []model.Job {

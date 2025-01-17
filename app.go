@@ -55,8 +55,7 @@ func (a *App) OnResizeWindow() {
 }
 
 func (a *App) CreateJob(p model.CreateJobParams) model.Job {
-	// TODO handle error
-	job, _ := jobHandler.CreateJob(p)
+	job := jobHandler.CreateJob(p)
 	return job
 }
 
