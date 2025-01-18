@@ -57,8 +57,8 @@ const button = recipe({
       },
       medium: {
         fontSize: vars.fontSize.textS,
-        height: 45,
-        minWidth: 180,
+        height: 35,
+        minWidth: 100,
         padding: `${vars.spacing.s} ${vars.spacing.m}`
       }
     }
