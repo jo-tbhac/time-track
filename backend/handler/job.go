@@ -18,6 +18,11 @@ func (h JobHandler) CreateJob(p model.CreateJobParams) model.Job {
 	return job
 }
 
+func (h JobHandler) UpdateJob(p model.UpdateJobParams) model.Job {
+	job, _ := h.repository.Update(p)
+	return job
+}
+
 func (h JobHandler) FindJobs() []model.Job {
 	jobs := h.repository.FindAll()
 

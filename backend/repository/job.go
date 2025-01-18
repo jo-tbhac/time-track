@@ -27,6 +27,22 @@ func (r JobRepository) Create(p model.CreateJobParams) (model.Job, error) {
 	return job, nil
 }
 
+func (r JobRepository) Update(p model.UpdateJobParams) (model.Job, error) {
+	var job model.Job
+	r.db.First(&job, p.ID)
+	job.Name = p.Name
+	job.HourlyWage = p.HourlyWage
+
+	result := r.db.Save(&job)
+
+	if result.Error != nil {
+		log.Printf("Fail to update job: %v\n", result.Error.Error())
+		return job, result.Error
+	}
+
+	return job, nil
+}
+
 func (r JobRepository) FindAll() []model.Job {
 	var jobs []model.Job
 	r.db.Find(&jobs)
