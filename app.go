@@ -64,6 +64,10 @@ func (a *App) UpdateJob(p model.UpdateJobParams) model.Job {
 	return job
 }
 
+func (a *App) DeleteJob(id int) {
+	jobHandler.DeleteJob(id)
+}
+
 func (a *App) FindJobs() []model.Job {
 	jobs := jobHandler.FindJobs()
 	return jobs

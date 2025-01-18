@@ -23,6 +23,10 @@ func (h JobHandler) UpdateJob(p model.UpdateJobParams) model.Job {
 	return job
 }
 
+func (h JobHandler) DeleteJob(id int) {
+	h.repository.Delete(id)
+}
+
 func (h JobHandler) FindJobs() []model.Job {
 	jobs := h.repository.FindAll()
 
