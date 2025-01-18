@@ -4,6 +4,8 @@ import {model} from '../models';
 
 export function CreateJob(arg1:model.CreateJobParams):Promise<model.Job>;
 
+export function DeleteJob(arg1:number):Promise<void>;
+
 export function FindJobs():Promise<Array<model.Job>>;
 
 export function OnResizeWindow():Promise<void>;

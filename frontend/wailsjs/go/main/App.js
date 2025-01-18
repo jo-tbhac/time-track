@@ -6,6 +6,10 @@ export function CreateJob(arg1) {
   return window['go']['main']['App']['CreateJob'](arg1);
 }
 
+export function DeleteJob(arg1) {
+  return window['go']['main']['App']['DeleteJob'](arg1);
+}
+
 export function FindJobs() {
   return window['go']['main']['App']['FindJobs']();
 }
