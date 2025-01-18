@@ -10,7 +10,7 @@ import type { Job } from '@/types/job'
 
 import styles from './JobListItemForm.css'
 import { type FormSchema, formSchema } from './JobListItemForm.schema'
-import { useCreateJob } from './hooks'
+import { useCreateJob, useUpdateJob } from './hooks'
 
 interface Props {
   job: Job
@@ -34,6 +34,7 @@ export const JobListItemForm: FC<Props> = ({ job, persisted, closeForm, setJobs 
   })
 
   const { createJob, creating } = useCreateJob()
+  const { updateJob, updating } = useUpdateJob()
 
   const handleSubmit = async () => {
     const isValid = await trigger()
@@ -44,14 +45,17 @@ export const JobListItemForm: FC<Props> = ({ job, persisted, closeForm, setJobs 
     const hourlyWage = Number(hourlyWageStr)
 
     if (persisted) {
-      // TODO Update
+      const updatedJob = await updateJob(job.id, { name, hourlyWage })
+      setJobs((currentJobs) =>
+        currentJobs.map((currentJob) => (currentJob.id === updatedJob.id ? updatedJob : currentJob))
+      )
+      closeForm()
       return
     }
 
-    // TODO handle error
-    const job = await createJob({ name, hourlyWage })
+    const createdJob = await createJob({ name, hourlyWage })
     setJobs((currentJobs) =>
-      currentJobs.map((currentJob) => (currentJob.id === job.id ? job : currentJob))
+      currentJobs.map((currentJob) => (currentJob.id === createdJob.id ? createdJob : currentJob))
     )
     closeForm()
   }
@@ -68,7 +72,7 @@ export const JobListItemForm: FC<Props> = ({ job, persisted, closeForm, setJobs 
       </TableCell>
       <TableCell>
         <div className={styles.actions}>
-          <Button type="button" size="small" loading={creating} onClick={handleSubmit}>
+          <Button type="button" size="small" loading={creating || updating} onClick={handleSubmit}>
             保存
           </Button>
           <Button type="button" size="small" color="secondary" onClick={closeForm}>

@@ -13,3 +13,7 @@ export function FindJobs() {
 export function OnResizeWindow() {
   return window['go']['main']['App']['OnResizeWindow']();
 }
+
+export function UpdateJob(arg1) {
+  return window['go']['main']['App']['UpdateJob'](arg1);
+}
