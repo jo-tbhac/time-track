@@ -55,7 +55,7 @@ export const JobListItemForm: FC<Props> = ({ job, persisted, closeForm, setJobs 
 
     const createdJob = await createJob({ name, hourlyWage })
     setJobs((currentJobs) =>
-      currentJobs.map((currentJob) => (currentJob.id === createdJob.id ? createdJob : currentJob))
+      currentJobs.map((currentJob) => (currentJob.id === job.id ? createdJob : currentJob))
     )
     closeForm()
   }
