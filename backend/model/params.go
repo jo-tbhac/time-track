@@ -6,6 +6,7 @@ type CreateJobParams struct {
 }
 
 type UpdateJobParams struct {
-	CreateJobParams
-	ID int `json:"id"`
+	ID         int    `json:"id"`
+	Name       string `json:"name"`
+	HourlyWage int    `json:"hourlyWage"`
 }

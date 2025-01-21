@@ -31,9 +31,9 @@ export namespace model {
 	    }
 	}
 	export class UpdateJobParams {
+	    id: number;
 	    name: string;
 	    hourlyWage: number;
-	    id: number;
 	
 	    static createFrom(source: any = {}) {
 	        return new UpdateJobParams(source);
@@ -41,9 +41,9 @@ export namespace model {
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.id = source["id"];
 	        this.name = source["name"];
 	        this.hourlyWage = source["hourlyWage"];
-	        this.id = source["id"];
 	    }
 	}
 
