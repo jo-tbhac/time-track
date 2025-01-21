@@ -10,7 +10,7 @@
     "editor.codeActionsOnSave": {
       "quickfix.biome": "explicit",
       "source.organizeImports.biome": "explicit"
-    },
+    }
   },
   "cSpell.enabled": true,
   "cSpell.import": ["${workspaceFolder}/frontend/.cspell/cspell.json"],
