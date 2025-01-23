@@ -71,3 +71,23 @@ func TestShouldSuccessfullyFindJobs(t *testing.T) {
 
 	assert.Equal(t, len(jobs), 1)
 }
+
+func TestShouldSuccessfullyDeleteJob(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewJobRepository(db)
+	job, err := r.Create(model.CreateJobParams{Name: "test job A", HourlyWage: 5000})
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	if err = r.Delete(int(job.ID)); err != nil {
+		t.Fatalf("Failed to delete job: %v", err)
+	}
+
+	jobs := r.FindAll()
+
+	assert.Equal(t, len(jobs), 0)
+}
