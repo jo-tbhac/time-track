@@ -55,3 +55,19 @@ func TestShouldSuccessfullyUpdateJob(t *testing.T) {
 	assert.Equal(t, job.Name, p.Name)
 	assert.Equal(t, job.HourlyWage, p.HourlyWage)
 }
+
+func TestShouldSuccessfullyFindJobs(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewJobRepository(db)
+	_, err := r.Create(model.CreateJobParams{Name: "test job A", HourlyWage: 5000})
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	jobs := r.FindAll()
+
+	assert.Equal(t, len(jobs), 1)
+}
