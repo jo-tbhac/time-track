@@ -17,7 +17,10 @@ type App struct {
 	ctx context.Context
 }
 
-var jobHandler handler.JobHandler
+var (
+	jobHandler    handler.JobHandler
+	recordHandler handler.RecordHandler
+)
 
 func init() {
 	db.Migrate()
@@ -25,6 +28,7 @@ func init() {
 	db := db.GetDB()
 
 	jobHandler = handler.NewJobHandler(repository.NewJobRepository(db))
+	recordHandler = handler.NewRecordHandler(repository.NewRecordRepository(db))
 }
 
 // NewApp creates a new App application struct
@@ -71,4 +75,9 @@ func (a *App) DeleteJob(id int) {
 func (a *App) FindJobs() []model.Job {
 	jobs := jobHandler.FindJobs()
 	return jobs
+}
+
+func (a *App) CreateRecord(p model.CreateRecordParams) model.Record {
+	record := recordHandler.CreateRecord(p)
+	return record
 }
