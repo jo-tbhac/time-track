@@ -4,5 +4,5 @@ import "time-track/backend/model"
 
 func Migrate() {
 	db := GetDB()
-	db.AutoMigrate(&model.Job{})
+	db.AutoMigrate(&model.Job{}, &model.Record{})
 }

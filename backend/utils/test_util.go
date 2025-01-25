@@ -25,7 +25,7 @@ func NewDBMock() (*gorm.DB, sqlmock.Sqlmock) {
 		log.Fatalf("An error %s was not expected when opening gorm database", err)
 	}
 
-	gormDB.AutoMigrate(&model.Job{})
+	gormDB.AutoMigrate(&model.Job{}, &model.Record{})
 
 	return gormDB, mock
 }
