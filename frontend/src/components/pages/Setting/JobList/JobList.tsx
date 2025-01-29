@@ -1,5 +1,4 @@
 import type { FC } from 'react'
-import { FaPlus } from 'react-icons/fa6'
 
 import {
   Col,
@@ -12,6 +11,7 @@ import {
   TableRow
 } from '@/components/ui/Table'
 import { TextButton } from '@/components/ui/TextButton'
+import { PlusIcon } from '@/lib/icons'
 
 import { JobListItem } from '../JobListItem'
 import styles from './JobList.css'
@@ -60,7 +60,7 @@ export const JobList: FC = () => {
       </TableContainer>
       <div className={styles.buttonContainer}>
         <TextButton type="button" onClick={handleClickNewJob}>
-          <FaPlus />
+          <PlusIcon />
           新規作成
         </TextButton>
       </div>
