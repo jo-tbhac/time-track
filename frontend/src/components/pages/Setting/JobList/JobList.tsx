@@ -11,11 +11,11 @@ import {
   TableRow
 } from '@/components/ui/Table'
 import { TextButton } from '@/components/ui/TextButton'
+import { useJobs } from '@/hooks/useJobs'
 import { PlusIcon } from '@/lib/icons'
 
 import { JobListItem } from '../JobListItem'
 import styles from './JobList.css'
-import { useJobs } from './hooks'
 
 export const JobList: FC = () => {
   const { loading, jobs, setJobs } = useJobs()
