@@ -32,7 +32,8 @@ const secondPanel = style([
 const thirdPanel = style([
   basePanelStyle,
   {
-    gridArea: 'thirdPanel'
+    gridArea: 'thirdPanel',
+    padding: vars.spacing.m
   }
 ])
 
