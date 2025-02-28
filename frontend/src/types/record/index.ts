@@ -1,7 +1,7 @@
 export interface Record {
   id: number
-  startedAt: string
-  endedAt: string | null
+  startedAt: Date
+  endedAt: Date | null
   note: string
   workTime: number
   jobId: number

@@ -14,8 +14,8 @@ const createRecord = async (params: Params): Promise<RecordType> => {
   const record = await CreateRecord(params as any)
   return {
     id: record.id,
-    startedAt: record.startedAt,
-    endedAt: record.endedAt,
+    startedAt: new Date(record.startedAt),
+    endedAt: record.endedAt ? new Date(record.endedAt) : null,
     note: record.note,
     workTime: record.workTime,
     jobId: record.jobId
