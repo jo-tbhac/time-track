@@ -18,6 +18,10 @@ export function FindJobs() {
   return window['go']['main']['App']['FindJobs']();
 }
 
+export function FindRecords() {
+  return window['go']['main']['App']['FindRecords']();
+}
+
 export function OnResizeWindow() {
   return window['go']['main']['App']['OnResizeWindow']();
 }

@@ -10,6 +10,8 @@ export function DeleteJob(arg1:number):Promise<void>;
 
 export function FindJobs():Promise<Array<model.Job>>;
 
+export function FindRecords():Promise<Array<model.Record>>;
+
 export function OnResizeWindow():Promise<void>;
 
 export function UpdateJob(arg1:model.UpdateJobParams):Promise<model.Job>;
