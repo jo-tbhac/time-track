@@ -33,3 +33,10 @@ func (r RecordRepository) Create(p model.CreateRecordParams) (model.Record, erro
 
 	return record, nil
 }
+
+func (r RecordRepository) FindAll() []model.Record {
+	var records []model.Record
+	r.db.Find(&records)
+
+	return records
+}

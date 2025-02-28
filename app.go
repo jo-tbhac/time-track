@@ -81,3 +81,8 @@ func (a *App) CreateRecord(p model.CreateRecordParams) model.Record {
 	record := recordHandler.CreateRecord(p)
 	return record
 }
+
+func (a *App) FindRecords() []model.Record {
+	records := recordHandler.FindRecords()
+	return records
+}

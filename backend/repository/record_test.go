@@ -87,3 +87,32 @@ func TestShouldSuccessfullyCreateRecordWithoutEndedAt(t *testing.T) {
 	assert.Equal(t, record.WorkTime, p.WorkTime)
 	assert.Equal(t, record.JobID, uint(p.JobID))
 }
+
+func TestShouldSuccessfullyFindRecords(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewRecordRepository(db)
+
+	job, err := createJob(db)
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	_, err = r.Create(model.CreateRecordParams{
+		StartedAt: time.Now(),
+		EndedAt:   nil,
+		Note:      "Sample text.",
+		WorkTime:  540,
+		JobID:     int(job.ID),
+	})
+
+	if err != nil {
+		t.Fatalf("Failed to create record: %v", err)
+	}
+
+	records := r.FindAll()
+
+	assert.Equal(t, len(records), 1)
+}
