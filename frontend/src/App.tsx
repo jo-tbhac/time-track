@@ -1,6 +1,6 @@
-import { DashboardLayout } from '@/components/layouts/DashboardLayout'
-import { Dashboard } from '@/components/pages/Dashboard'
-import { Setting } from '@/components/pages/Setting'
+import { Dashboard } from '@/components/templates/Dashboard'
+import { DashboardLayout } from '@/components/templates/DashboardLayout'
+import { Setting } from '@/components/templates/Setting'
 import { BrowserRouter, Navigate, Route, Routes } from '@/lib/router'
 import { useSubscribeWindowResize } from '@/runtime/events/resizeWindow'
 
