@@ -5,7 +5,8 @@ import { vars } from '@/styles/theme.css'
 const container = style({
   alignItems: 'center',
   display: 'flex',
-  gap: vars.spacing.xs
+  gap: vars.spacing.xs,
+  marginBottom: vars.spacing.m
 })
 
 const title = style({

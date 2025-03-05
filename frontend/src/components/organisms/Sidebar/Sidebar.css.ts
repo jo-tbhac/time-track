@@ -7,8 +7,9 @@ const container = style({
   background: `linear-gradient(to bottom, ${vars.color.main.primaryDark} 0%, ${vars.color.main.secondary} 100%)`,
   display: 'flex',
   flexDirection: 'column',
+  flexShrink: 0,
   padding: `${vars.spacing.m} 0px`,
-  width: 60
+  width: vars.width.sideBar
 })
 
 const topSection = style({

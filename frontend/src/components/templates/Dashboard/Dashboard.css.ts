@@ -5,36 +5,34 @@ import { vars } from '@/styles/theme.css'
 
 const container = style({
   backgroundColor: vars.color.component.background,
-  display: 'grid',
+  display: 'flex',
   flex: 1,
   gap: vars.spacing.m,
-  gridTemplateAreas: `
-    'fistPanel thirdPanel'
-    'secondPanel thirdPanel'
-  `,
-  padding: vars.spacing.m
+  padding: vars.spacing.m,
+  width: `calc(100% - ${vars.width.sideBar})`,
+  '@media': {
+    'screen and (max-width: 1200px)': {
+      flexDirection: 'column',
+      overflowY: 'auto'
+    }
+  }
 })
 
-const firstPanel = style([
-  basePanelStyle,
-  {
-    gridArea: 'fistPanel'
-  }
-])
+const panelWrapper = style({
+  display: 'flex',
+  flex: 1,
+  flexDirection: 'column',
+  gap: vars.spacing.m,
+  minWidth: `calc((100% - ${vars.width.sideBar})/2)`
+})
 
-const secondPanel = style([
+const panel = style([
   basePanelStyle,
   {
-    gridArea: 'secondPanel'
-  }
-])
-
-const thirdPanel = style([
-  basePanelStyle,
-  {
-    gridArea: 'thirdPanel',
+    flex: 1,
+    overflowY: 'auto',
     padding: vars.spacing.m
   }
 ])
 
-export default { container, firstPanel, secondPanel, thirdPanel }
+export default { container, panelWrapper, panel }
