@@ -2,10 +2,7 @@ import type { ComponentProps, FC, ReactNode } from 'react'
 
 import styles from './Table.css'
 
-interface TableContainerProps {
-  children?: ReactNode
-  className?: string
-}
+type TableContainerProps = Pick<ComponentProps<'div'>, 'children' | 'className' | 'ref'>
 
 interface TableProps {
   children?: ReactNode
@@ -38,10 +35,14 @@ interface ColProps {
   width?: ComponentProps<'col'>['width']
 }
 
-export const TableContainer: FC<TableContainerProps> = ({ children, className }) => {
+export const TableContainer: FC<TableContainerProps> = ({ ref, children, className }) => {
   const classNames = [styles.tableContainer, className].join(' ')
 
-  return <div className={classNames}>{children}</div>
+  return (
+    <div ref={ref} className={classNames}>
+      {children}
+    </div>
+  )
 }
 
 export const Table: FC<TableProps> = ({ children, className }) => {
