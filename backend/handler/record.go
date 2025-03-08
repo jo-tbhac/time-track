@@ -18,6 +18,11 @@ func (h RecordHandler) CreateRecord(p model.CreateRecordParams) model.Record {
 	return record
 }
 
+func (h RecordHandler) UpdateRecord(p model.UpdateRecordParams) model.Record {
+	record, _ := h.repository.Update(p)
+	return record
+}
+
 func (h RecordHandler) FindRecords() []model.Record {
 	records := h.repository.FindAll()
 	return records
