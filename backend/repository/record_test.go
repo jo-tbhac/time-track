@@ -88,6 +88,255 @@ func TestShouldSuccessfullyCreateRecordWithoutEndedAt(t *testing.T) {
 	assert.Equal(t, record.JobID, uint(p.JobID))
 }
 
+func TestShouldSuccessfullyUpdateRecord(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewRecordRepository(db)
+	job, err := createJob(db)
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	createParams := model.CreateRecordParams{
+		StartedAt: time.Now(),
+		EndedAt:   nil,
+		Note:      "Sample text.",
+		WorkTime:  540,
+		JobID:     int(job.ID),
+	}
+
+	record, err := r.Create(createParams)
+
+	if err != nil {
+		t.Fatalf("Failed to create record: %v", err)
+	}
+
+	startedAt := time.Now()
+	endedAt := time.Now()
+	note := "Updated sample text."
+	workTime := 700
+
+	updateParams := model.UpdateRecordParams{
+		ID:                  int(record.ID),
+		StartedAt:           &startedAt,
+		EndedAt:             &endedAt,
+		Note:                &note,
+		WorkTime:            &workTime,
+		ShouldUpdateEndedAt: true,
+	}
+
+	updatedRecord, err := r.Update(updateParams)
+
+	if err != nil {
+		t.Fatalf("Failed to update record: %v", err)
+	}
+
+	assert.Equal(t, time.Time.Equal(updatedRecord.StartedAt, startedAt), true)
+	assert.Equal(t, time.Time.Equal(*updatedRecord.EndedAt, endedAt), true)
+	assert.Equal(t, updatedRecord.Note, note)
+	assert.Equal(t, updatedRecord.WorkTime, workTime)
+}
+
+func TestShouldSuccessfullyUpdateRecordWithoutStartedAt(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewRecordRepository(db)
+	job, err := createJob(db)
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	createParams := model.CreateRecordParams{
+		StartedAt: time.Now(),
+		EndedAt:   nil,
+		Note:      "Sample text.",
+		WorkTime:  540,
+		JobID:     int(job.ID),
+	}
+
+	record, err := r.Create(createParams)
+
+	if err != nil {
+		t.Fatalf("Failed to create record: %v", err)
+	}
+
+	endedAt := time.Now()
+	note := "Updated sample text."
+	workTime := 700
+
+	updateParams := model.UpdateRecordParams{
+		ID:                  int(record.ID),
+		EndedAt:             &endedAt,
+		Note:                &note,
+		WorkTime:            &workTime,
+		ShouldUpdateEndedAt: true,
+	}
+
+	updatedRecord, err := r.Update(updateParams)
+
+	if err != nil {
+		t.Fatalf("Failed to update record: %v", err)
+	}
+
+	assert.Equal(t, time.Time.Equal(updatedRecord.StartedAt, record.StartedAt), true)
+	assert.Equal(t, time.Time.Equal(*updatedRecord.EndedAt, endedAt), true)
+	assert.Equal(t, updatedRecord.Note, note)
+	assert.Equal(t, updatedRecord.WorkTime, workTime)
+}
+
+func TestShouldSuccessfullyUpdateRecordWithoutEndedAt(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewRecordRepository(db)
+	job, err := createJob(db)
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	endedAt := time.Now()
+
+	createParams := model.CreateRecordParams{
+		StartedAt: time.Now(),
+		EndedAt:   &endedAt,
+		Note:      "Sample text.",
+		WorkTime:  540,
+		JobID:     int(job.ID),
+	}
+
+	record, err := r.Create(createParams)
+
+	if err != nil {
+		t.Fatalf("Failed to create record: %v", err)
+	}
+
+	startedAt := time.Now()
+	note := "Updated sample text."
+	workTime := 700
+
+	updateParams := model.UpdateRecordParams{
+		ID:                  int(record.ID),
+		StartedAt:           &startedAt,
+		Note:                &note,
+		WorkTime:            &workTime,
+		ShouldUpdateEndedAt: false,
+	}
+
+	updatedRecord, err := r.Update(updateParams)
+
+	if err != nil {
+		t.Fatalf("Failed to update record: %v", err)
+	}
+
+	assert.Equal(t, time.Time.Equal(updatedRecord.StartedAt, startedAt), true)
+	assert.Equal(t, time.Time.Equal(*updatedRecord.EndedAt, *record.EndedAt), true)
+	assert.Equal(t, updatedRecord.Note, note)
+	assert.Equal(t, updatedRecord.WorkTime, workTime)
+}
+
+func TestShouldSuccessfullyUpdateRecordWithoutWorkTime(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewRecordRepository(db)
+	job, err := createJob(db)
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	createParams := model.CreateRecordParams{
+		StartedAt: time.Now(),
+		EndedAt:   nil,
+		Note:      "Sample text.",
+		WorkTime:  540,
+		JobID:     int(job.ID),
+	}
+
+	record, err := r.Create(createParams)
+
+	if err != nil {
+		t.Fatalf("Failed to create record: %v", err)
+	}
+
+	startedAt := time.Now()
+	endedAt := time.Now()
+	note := "Updated sample text."
+
+	updateParams := model.UpdateRecordParams{
+		ID:                  int(record.ID),
+		StartedAt:           &startedAt,
+		EndedAt:             &endedAt,
+		Note:                &note,
+		ShouldUpdateEndedAt: true,
+	}
+
+	updatedRecord, err := r.Update(updateParams)
+
+	if err != nil {
+		t.Fatalf("Failed to update record: %v", err)
+	}
+
+	assert.Equal(t, time.Time.Equal(updatedRecord.StartedAt, startedAt), true)
+	assert.Equal(t, time.Time.Equal(*updatedRecord.EndedAt, endedAt), true)
+	assert.Equal(t, updatedRecord.Note, note)
+	assert.Equal(t, updatedRecord.WorkTime, record.WorkTime)
+}
+
+func TestShouldSuccessfullyUpdateRecordWithoutNote(t *testing.T) {
+	db, _ := utils.NewDBMock()
+	defer utils.DeleteTestingDatabase()
+
+	r := NewRecordRepository(db)
+	job, err := createJob(db)
+
+	if err != nil {
+		t.Fatalf("Failed to create job: %v", err)
+	}
+
+	createParams := model.CreateRecordParams{
+		StartedAt: time.Now(),
+		EndedAt:   nil,
+		Note:      "Sample text.",
+		WorkTime:  540,
+		JobID:     int(job.ID),
+	}
+
+	record, err := r.Create(createParams)
+
+	if err != nil {
+		t.Fatalf("Failed to create record: %v", err)
+	}
+
+	startedAt := time.Now()
+	endedAt := time.Now()
+	workTime := 700
+
+	updateParams := model.UpdateRecordParams{
+		ID:                  int(record.ID),
+		StartedAt:           &startedAt,
+		EndedAt:             &endedAt,
+		WorkTime:            &workTime,
+		ShouldUpdateEndedAt: true,
+	}
+
+	updatedRecord, err := r.Update(updateParams)
+
+	if err != nil {
+		t.Fatalf("Failed to update record: %v", err)
+	}
+
+	assert.Equal(t, time.Time.Equal(updatedRecord.StartedAt, startedAt), true)
+	assert.Equal(t, time.Time.Equal(*updatedRecord.EndedAt, endedAt), true)
+	assert.Equal(t, updatedRecord.Note, record.Note)
+	assert.Equal(t, updatedRecord.WorkTime, workTime)
+}
+
 func TestShouldSuccessfullyFindRecords(t *testing.T) {
 	db, _ := utils.NewDBMock()
 	defer utils.DeleteTestingDatabase()

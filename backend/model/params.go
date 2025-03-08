@@ -20,3 +20,12 @@ type CreateRecordParams struct {
 	WorkTime  int        `json:"workTime"`
 	JobID     int        `json:"jobId"`
 }
+
+type UpdateRecordParams struct {
+	ID                  int        `json:"id"`
+	StartedAt           *time.Time `json:"startedAt"`
+	EndedAt             *time.Time `json:"endedAt"`
+	Note                *string    `json:"note"`
+	WorkTime            *int       `json:"workTime"`
+	ShouldUpdateEndedAt bool       `json:"shouldUpdateEndedAt"`
+}
