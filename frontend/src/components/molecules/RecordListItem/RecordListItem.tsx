@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { IconButton } from '@/components/atoms/IconButton'
 import { TableCell, TableRow } from '@/components/atoms/Table'
@@ -10,6 +10,7 @@ import { format } from '@/lib/date'
 import { EllipsisIcon } from '@/lib/icons'
 import type { Job } from '@/types/job'
 import type { Record as RecordType } from '@/types/record'
+import { updateRecord } from '@/usecases/records'
 
 import styles from './RecordListItem.css'
 
@@ -20,6 +21,11 @@ interface Props {
 }
 
 export const RecordListItem: FC<Props> = ({ record, jobs, colWidthList }) => {
+  const [startedTimeStr, setStartedTimeStr] = useState(() => format(record.startedAt, 'H:mm'))
+  const [endedTimeStr, setEndedTimeStr] = useState(() =>
+    record.endedAt ? format(record.endedAt, 'H:mm') : ''
+  )
+
   const dateString = useMemo(() => {
     return format(record.startedAt, 'M/d E')
   }, [record.startedAt])
@@ -32,6 +38,45 @@ export const RecordListItem: FC<Props> = ({ record, jobs, colWidthList }) => {
   const colWidthMap = useMemo(() => {
     return new Map(colWidthList.map(({ field, width }) => [field, width]))
   }, [colWidthList])
+
+  const parseTimeStrToDate = (timeStr: string, date: Date): Date | null => {
+    if (!timeStr) {
+      return null
+    }
+    const [hour, minute] = timeStr.split(':')
+    const parsedDate = date.setHours(Number(hour), Number(minute))
+
+    return new Date(parsedDate)
+  }
+
+  const handleChangeStartedAt = (newValue: string) => {
+    setStartedTimeStr(newValue)
+  }
+
+  const handleChangeEndedAt = (newValue: string) => {
+    setEndedTimeStr(newValue)
+  }
+
+  const handleBlurStartedAt = (currentValue: string) => {
+    const defaultValue = format(record.startedAt, 'H:mm')
+    if (currentValue === defaultValue) {
+      return
+    }
+    const newDate = parseTimeStrToDate(currentValue, record.startedAt)
+    if (newDate == null) {
+      return
+    }
+    updateRecord({ id: record.id, startedAt: newDate })
+  }
+
+  const handleBlurEndedAt = (currentValue: string) => {
+    const defaultValue = record.endedAt ? format(record.endedAt, 'H:mm') : ''
+    if (currentValue === defaultValue) {
+      return
+    }
+    const newDate = parseTimeStrToDate(currentValue, record.startedAt)
+    updateRecord({ id: record.id, endedAt: newDate, shouldUpdateEndedAt: true })
+  }
 
   return (
     <TableRow>
@@ -47,17 +92,27 @@ export const RecordListItem: FC<Props> = ({ record, jobs, colWidthList }) => {
       </TableCell>
       <TableCell className={styles.tableCell}>
         <div style={{ width: colWidthMap.get('startedAt') }} className={styles.tableCellContent}>
-          <TimeInput value="0:00" onChange={() => {}} className={styles.textInput} />
+          <TimeInput
+            value={startedTimeStr}
+            onChange={handleChangeStartedAt}
+            onBlur={handleBlurStartedAt}
+            className={styles.textInput}
+          />
         </div>
       </TableCell>
       <TableCell className={styles.tableCell}>
         <div style={{ width: colWidthMap.get('endedAt') }} className={styles.tableCellContent}>
-          <TimeInput value="0:00" onChange={() => {}} className={styles.textInput} />
+          <TimeInput
+            value={endedTimeStr}
+            onChange={handleChangeEndedAt}
+            onBlur={handleBlurEndedAt}
+            className={styles.textInput}
+          />
         </div>
       </TableCell>
       <TableCell className={styles.tableCell}>
         <div style={{ width: colWidthMap.get('workTime') }} className={styles.tableCellContent}>
-          <TextInput className={styles.textInput} />
+          <TextInput value={record.workTime} onChange={() => {}} className={styles.textInput} />
         </div>
       </TableCell>
       <TableCell className={styles.tableCell}>

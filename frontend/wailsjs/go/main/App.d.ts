@@ -15,3 +15,5 @@ export function FindRecords():Promise<Array<model.Record>>;
 export function OnResizeWindow():Promise<void>;
 
 export function UpdateJob(arg1:model.UpdateJobParams):Promise<model.Job>;
+
+export function UpdateRecord(arg1:model.UpdateRecordParams):Promise<model.Record>;

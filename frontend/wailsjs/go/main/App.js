@@ -29,3 +29,7 @@ export function OnResizeWindow() {
 export function UpdateJob(arg1) {
   return window['go']['main']['App']['UpdateJob'](arg1);
 }
+
+export function UpdateRecord(arg1) {
+  return window['go']['main']['App']['UpdateRecord'](arg1);
+}

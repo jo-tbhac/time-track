@@ -128,6 +128,48 @@ export namespace model {
 	        this.hourlyWage = source["hourlyWage"];
 	    }
 	}
+	export class UpdateRecordParams {
+	    id: number;
+	    // Go type: time
+	    startedAt?: any;
+	    // Go type: time
+	    endedAt?: any;
+	    note?: string;
+	    workTime?: number;
+	    shouldUpdateEndedAt: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new UpdateRecordParams(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.id = source["id"];
+	        this.startedAt = this.convertValues(source["startedAt"], null);
+	        this.endedAt = this.convertValues(source["endedAt"], null);
+	        this.note = source["note"];
+	        this.workTime = source["workTime"];
+	        this.shouldUpdateEndedAt = source["shouldUpdateEndedAt"];
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
 
 }
 
