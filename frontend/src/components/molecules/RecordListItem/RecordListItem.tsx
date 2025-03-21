@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { ChangeEvent, FC } from 'react'
 import { useMemo, useState } from 'react'
 
 import { IconButton } from '@/components/atoms/IconButton'
@@ -25,6 +25,7 @@ export const RecordListItem: FC<Props> = ({ record, jobs, colWidthList }) => {
   const [endedTimeStr, setEndedTimeStr] = useState(() =>
     record.endedAt ? format(record.endedAt, 'H:mm') : ''
   )
+  const [workTime, setWorkTime] = useState(record.workTime)
 
   const dateString = useMemo(() => {
     return format(record.startedAt, 'M/d E')
@@ -57,6 +58,13 @@ export const RecordListItem: FC<Props> = ({ record, jobs, colWidthList }) => {
     setEndedTimeStr(newValue)
   }
 
+  const handleChangeWorkTime = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value
+    if (/^\d+$/.test(newValue)) {
+      setWorkTime(Number(newValue))
+    }
+  }
+
   const handleBlurStartedAt = (currentValue: string) => {
     const defaultValue = format(record.startedAt, 'H:mm')
     if (currentValue === defaultValue) {
@@ -76,6 +84,10 @@ export const RecordListItem: FC<Props> = ({ record, jobs, colWidthList }) => {
     }
     const newDate = parseTimeStrToDate(currentValue, record.startedAt)
     updateRecord({ id: record.id, endedAt: newDate, shouldUpdateEndedAt: true })
+  }
+
+  const handleBlurWorkTime = () => {
+    updateRecord({ id: record.id, workTime })
   }
 
   return (
@@ -112,7 +124,12 @@ export const RecordListItem: FC<Props> = ({ record, jobs, colWidthList }) => {
       </TableCell>
       <TableCell className={styles.tableCell}>
         <div style={{ width: colWidthMap.get('workTime') }} className={styles.tableCellContent}>
-          <TextInput value={record.workTime} onChange={() => {}} className={styles.textInput} />
+          <TextInput
+            value={workTime}
+            onChange={handleChangeWorkTime}
+            onBlur={handleBlurWorkTime}
+            className={styles.textInput}
+          />
         </div>
       </TableCell>
       <TableCell className={styles.tableCell}>
