@@ -39,21 +39,26 @@ func (r RecordRepository) Update(p model.UpdateRecordParams) (model.Record, erro
 	r.db.First(&record, p.ID)
 
 	var updateRecord model.Record
+	var fields []string
 
 	if p.StartedAt != nil {
+		fields = append(fields, "StartedAt")
 		updateRecord.StartedAt = *p.StartedAt
 	}
 	if p.WorkTime != nil {
+		fields = append(fields, "WorkTime")
 		updateRecord.WorkTime = *p.WorkTime
 	}
 	if p.Note != nil {
+		fields = append(fields, "Note")
 		updateRecord.Note = *p.Note
 	}
 	if p.ShouldUpdateEndedAt {
+		fields = append(fields, "EndedAt")
 		updateRecord.EndedAt = p.EndedAt
 	}
 
-	result := r.db.Model(&record).Updates(updateRecord)
+	result := r.db.Model(&record).Select(fields).Updates(updateRecord)
 
 	if result.Error != nil {
 		log.Printf("Fail to update record: %v\n", result.Error.Error())
